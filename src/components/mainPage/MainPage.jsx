@@ -6,7 +6,6 @@ import Content from "./content/Content";
 
 const ContentContainer = styled.div`
   display: flex;
-  height: 100vh;
 `;
 
 const MainPage = () => {

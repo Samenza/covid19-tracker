@@ -4,14 +4,14 @@ import LineChart from "./../../../../chart/chart";
 const Box = styled.section`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  align-items: center;
+  width: 35%;
 `;
 const Card = styled.div`
   height: 15vh;
   width: 70%;
   box-shadow: 0px -1px 4px 1px #d1d1d199;
   padding: 1rem;
-  margin: 1rem;
   background-color: #fbfbfb;
   border: 0.5px solid #4f5d7547;
   border-radius: 1rem;
@@ -22,7 +22,7 @@ const TitleCard = styled.div`
   width: 70%;
   box-shadow: 0px -1px 4px 1px #d1d1d199;
   padding: 1rem;
-  margin: 1rem 1rem 0;
+  margin: 1rem 0;
   background-color: #fbfbfb;
   border: 0.5px solid #4f5d7547;
   border-radius: 1rem;

@@ -1,28 +1,38 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
-import styled from "styled-components";
 
 const options = {
-  responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: "top",
     },
   },
 };
-const DATA_COUNT = 5;
-const data = {
-  labels: ["Red", "Orange", "Yellow", "Green", "Blue"],
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: [10, 20, 30, 40, 50],
-    },
-  ],
+const data = (data) => {
+  let title = Object.keys(data);
+  let value = Object.values(data);
+  return {
+    labels: title,
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: value,
+        backgroundColor: ["#F94144", "#0EAD69", "#70D6FF", "#4F5D75"],
+      },
+    ],
+  };
 };
 
-const DoughnutChart = () => {
-  return <Doughnut options={options} data={data} />;
+const DoughnutChart = ({ globalInforamtion }) => {
+  return (
+    <Doughnut
+      options={options}
+      data={() => data(globalInforamtion)}
+      width="100%"
+      height="60%"
+    />
+  );
 };
 
 export default DoughnutChart;

@@ -7,13 +7,11 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 10vh;
+  padding: 2rem;
   width: 100%;
   background-color: #f2f2f2;
 `;
-const Graph = styled.div`
-  width: 100%;
-  height: 60vh;
-`;
+
 const Content = () => {
   return (
     <Container>
