@@ -1,8 +1,9 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import styled from "styled-components";
 
 const options = {
-  maintainAspectRatio: false,
+  maintainAspectRatio: true,
   plugins: {
     legend: {
       position: "top",
@@ -24,14 +25,32 @@ const data = (data) => {
   };
 };
 
+const DoughuntContainer = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fbfbfb;
+  border-radius: 1rem;
+  box-shadow: 0 2px 2px 2px #c2c2c2;
+  padding: 1rem;
+`;
+
+const Title = styled.h4`
+  color: #4f5d75;
+  font-size: 2vw;
+`;
 const DoughnutChart = ({ globalInforamtion }) => {
   return (
-    <Doughnut
-      options={options}
-      data={() => data(globalInforamtion)}
-      width="100%"
-      height="60%"
-    />
+    <DoughuntContainer>
+      <Title>Global statistics</Title>
+      <Doughnut
+        options={options}
+        data={() => data(globalInforamtion)}
+        height="60%"
+      />
+    </DoughuntContainer>
   );
 };
 

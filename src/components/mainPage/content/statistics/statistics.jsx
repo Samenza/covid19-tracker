@@ -6,7 +6,11 @@ import StatesticCard from "./statsticsCard/StatesticsCard";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #fbfbfb;
+  border-radius: 1rem;
+  box-shadow: 0 2px 2px 2px #c2c2c2;
 `;
 const Statistics = () => {
   const [cards, setCards] = useState();

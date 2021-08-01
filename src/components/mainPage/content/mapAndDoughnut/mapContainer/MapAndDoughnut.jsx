@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import DoughnutChart from "./../../../chart/DoughnutChart";
+import DoughnutChart from "../../../../chart/DoughnutChart";
 import axios from "axios";
-import WorldMap from "../../../map/worldMap";
+import WorldMap from "../../../../map/worldMap";
 
 const Container = styled.div`
   width: 100%;
@@ -10,18 +10,14 @@ const Container = styled.div`
   display: flex;
 `;
 
-const DoughuntContainer = styled.div`
-  width: 20%;
-  height: 50vh;
+const MapContainer = styled.div`
+  width: 65%;
+  height: 100%;
+  margin-right: 1.5rem;
   background-color: #fbfbfb;
   border-radius: 1rem;
   box-shadow: 0 2px 2px 2px #c2c2c2;
-  padding: 0 20px;
-`;
-
-const MapContainer = styled.div`
-  width: 80%;
-  height: 100%;
+  padding: 1rem;
 `;
 
 const MapAndDoughnut = () => {
@@ -49,6 +45,7 @@ const MapAndDoughnut = () => {
           <MapContainer>
             <WorldMap />
           </MapContainer>
+          <DoughnutChart globalInforamtion={globalInforamtion} />
         </React.Fragment>
       )}
     </Container>

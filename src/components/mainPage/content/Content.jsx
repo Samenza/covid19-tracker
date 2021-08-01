@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Statistics from "./statistics/statistics";
-import MapAndDoughnut from "./mapAndDoughnut/MapAndDoughnut";
+import MapAndDoughnut from "./mapAndDoughnut/mapContainer/MapAndDoughnut";
 
 const Container = styled.section`
   display: flex;
