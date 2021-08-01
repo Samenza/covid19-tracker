@@ -6,7 +6,7 @@ import StatesticCard from "./statsticsCard/StatesticsCard";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   background-color: #fbfbfb;
   border-radius: 1rem;

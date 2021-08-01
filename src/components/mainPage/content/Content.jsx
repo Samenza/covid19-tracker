@@ -6,8 +6,7 @@ import MapAndDoughnut from "./mapAndDoughnut/mapContainer/MapAndDoughnut";
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
-  padding: 2rem;
+  padding: 0.4rem 2rem;
   width: 100%;
   background-color: #f2f2f2;
 `;

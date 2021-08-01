@@ -45,11 +45,7 @@ const DoughnutChart = ({ globalInforamtion }) => {
   return (
     <DoughuntContainer>
       <Title>Global statistics</Title>
-      <Doughnut
-        options={options}
-        data={() => data(globalInforamtion)}
-        height="60%"
-      />
+      <Doughnut options={options} data={() => data(globalInforamtion)} />
     </DoughuntContainer>
   );
 };

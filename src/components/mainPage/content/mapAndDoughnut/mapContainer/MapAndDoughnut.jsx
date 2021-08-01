@@ -22,6 +22,8 @@ const MapContainer = styled.div`
 
 const MapAndDoughnut = () => {
   const [globalInforamtion, setGlobalinformation] = useState();
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  console.log(selectedCountry);
   useEffect(() => {
     let data = {};
     axios
@@ -43,7 +45,10 @@ const MapAndDoughnut = () => {
       {globalInforamtion && (
         <React.Fragment>
           <MapContainer>
-            <WorldMap />
+            <WorldMap
+              setSelectedCountry={setSelectedCountry}
+              selectedCountry={selectedCountry}
+            />
           </MapContainer>
           <DoughnutChart globalInforamtion={globalInforamtion} />
         </React.Fragment>
