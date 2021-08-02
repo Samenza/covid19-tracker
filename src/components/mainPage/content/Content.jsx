@@ -8,6 +8,7 @@ const Container = styled.section`
   flex-direction: column;
   padding: 0.4rem 2rem;
   width: 100%;
+
   background-color: #f2f2f2;
 `;
 

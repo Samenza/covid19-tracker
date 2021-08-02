@@ -11,8 +11,8 @@ const options = {
   },
 };
 const data = (data) => {
-  let title = Object.keys(data);
-  let value = Object.values(data);
+  let title = Object.keys(data.info);
+  let value = Object.values(data.info);
   return {
     labels: title,
     datasets: [
@@ -41,10 +41,25 @@ const Title = styled.h4`
   color: #4f5d75;
   font-size: 2vw;
 `;
-const DoughnutChart = ({ globalInforamtion }) => {
+const Buttun = styled.button`
+  background-color: #f5f6f8;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 1px #c2c2c2;
+  cursor: pointer;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+`;
+const DoughnutChart = ({ globalInforamtion, setSelectedCountry }) => {
   return (
     <DoughuntContainer>
-      <Title>Global statistics</Title>
+      <Buttun onClick={() => setSelectedCountry(null)}>global statistic</Buttun>
+      <Title>
+        {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
+      </Title>
       <Doughnut options={options} data={() => data(globalInforamtion)} />
     </DoughuntContainer>
   );

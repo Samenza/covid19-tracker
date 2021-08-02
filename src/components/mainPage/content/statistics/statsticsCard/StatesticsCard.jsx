@@ -31,9 +31,7 @@ const TitleCard = styled.div`
 const Title = styled.h3`
   margin: 0;
   text-align: center;
-  color: ${(props) => {
-    return props.color.border;
-  }};
+  color: #4f5d75;
 `;
 const StatesticCard = ({ color, data, cardChartData }) => {
   //this useState is for this error =>  color is a function
@@ -41,8 +39,8 @@ const StatesticCard = ({ color, data, cardChartData }) => {
   return (
     <Box>
       <TitleCard>
-        <Title color={cardColor}>{data.title}</Title>
-        <Title color={cardColor}>{data.number}</Title>
+        <Title>{data.title}</Title>
+        <Title>{data.number}</Title>
       </TitleCard>
       <Card>
         <LineChart color={cardColor} chartData={cardChartData} />

@@ -21,25 +21,46 @@ const MapContainer = styled.div`
 `;
 
 const MapAndDoughnut = () => {
+  const [globalCoronaData, setGlobalCoronaData] = useState();
   const [globalInforamtion, setGlobalinformation] = useState();
   const [selectedCountry, setSelectedCountry] = useState(null);
-  console.log(selectedCountry);
+  const [coronaDataByCountry, setCoronaDataByCountry] = useState([]);
+
+  const CreateGlobalInformation = (coronaData) => {
+    let data = { info: {} };
+    data.info.death = coronaData.deaths;
+    data.info.recovered = coronaData.recovered;
+    data.info.totalCases = coronaData.cases;
+    data.info.active = coronaData.active;
+    coronaData.country && (data.name = coronaData.country);
+    setGlobalinformation(data);
+  };
+
   useEffect(() => {
-    let data = {};
     axios
       .get("https://corona.lmao.ninja/v2/all")
       .then((res) => {
-        data.death = res.data.deaths;
-        data.recovered = res.data.recovered;
-        data.totalCases = res.data.cases;
-        data.active = res.data.active;
-
-        setGlobalinformation(data);
+        setGlobalCoronaData(res.data);
+        CreateGlobalInformation(res.data);
       })
       .catch((error) => {
         alert("error");
       });
   }, []);
+  useEffect(() => {
+    if (selectedCountry) {
+      let data = coronaDataByCountry.filter((country) => {
+        return country.countryInfo.iso3 === selectedCountry.properties.iso_a3;
+      });
+      CreateGlobalInformation(data[0]);
+    } else {
+      if (globalCoronaData) {
+        CreateGlobalInformation(globalCoronaData);
+      } else {
+        return;
+      }
+    }
+  }, [selectedCountry, coronaDataByCountry, globalCoronaData]);
   return (
     <Container>
       {globalInforamtion && (
@@ -47,10 +68,15 @@ const MapAndDoughnut = () => {
           <MapContainer>
             <WorldMap
               setSelectedCountry={setSelectedCountry}
-              selectedCountry={selectedCountry}
+              setCoronaDataByCountry={setCoronaDataByCountry}
+              coronaDataByCountry={coronaDataByCountry}
             />
           </MapContainer>
-          <DoughnutChart globalInforamtion={globalInforamtion} />
+          <DoughnutChart
+            globalInforamtion={globalInforamtion}
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+          />
         </React.Fragment>
       )}
     </Container>

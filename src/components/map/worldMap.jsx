@@ -1,13 +1,25 @@
 import React, { useRef, useEffect, useState } from "react";
-import { geoMercator, geoPath, scaleLinear, select, selectAll } from "d3";
+import { geoMercator, geoPath, scaleLinear, select } from "d3";
 import data from "../../services/maps/custom.geo.json";
 import axios from "axios";
+import styled from "styled-components";
 
-const WorldMap = ({ setSelectedCountry }) => {
+const Map = styled.svg`
+  & :hover.country {
+    stroke: black;
+    stroke-width: 2px;
+    cursor: pointer;
+  }
+`;
+
+const WorldMap = ({
+  setSelectedCountry,
+  coronaDataByCountry,
+  setCoronaDataByCountry,
+}) => {
   const svgRef = useRef();
   const coronaDataReadyRef = useRef(false);
   const mapWrapperRef = useRef();
-  const [coronaData, setCoronaData] = useState([]);
   const [maxCases, setMaxCases] = useState(1);
 
   useEffect(() => {
@@ -17,10 +29,10 @@ const WorldMap = ({ setSelectedCountry }) => {
         country.cases > max && (max = country.cases);
       }
       coronaDataReadyRef.current = true;
-      setCoronaData(res.data);
+      setCoronaDataByCountry(res.data);
       setMaxCases(max);
     });
-  }, []);
+  }, [setCoronaDataByCountry]);
   useEffect(() => {
     if (coronaDataReadyRef.current) {
       const svg = select(svgRef.current);
@@ -33,28 +45,16 @@ const WorldMap = ({ setSelectedCountry }) => {
         .range(["#d4bbbb", "#ca0000"]);
 
       const countryCases = (feature) => {
-        let data = coronaData.filter((country) => {
+        let data = coronaDataByCountry.filter((country) => {
           return country.countryInfo.iso3 === feature.properties.iso_a3;
         });
         return data[0] ? data[0].cases : 10;
       };
-      const mouseOverHandle = (feature) => {
-        selectAll(".country").style("opacity", 0.8);
 
-        select(feature.path[0]).style("opacity", 1).style("stroke", "black");
-      };
-      const mouseLeaveHandle = (feature) => {
-        selectAll(".country").style("opacity", 1);
-        select(feature.path[0]).style("stroke", "transparent");
-        selectAll(".country")
-          .style("opacity", 1)
-          .style("stroke", "transparent");
-      };
       const countryText = (feature) => {
-        let data = coronaData.filter((country) => {
+        let data = coronaDataByCountry.filter((country) => {
           return country.countryInfo.iso3 === feature.properties.iso_a3;
         });
-        console.log(feature);
         return data[0] ? data[0].cases : null;
       };
 
@@ -66,24 +66,21 @@ const WorldMap = ({ setSelectedCountry }) => {
         .selectAll(".country")
         .data(data.features)
         .join("path")
-        .on("mouseleave", (d) => mouseLeaveHandle(d))
-        .on("mouseover", (d) => mouseOverHandle(d))
-        .on("click", (d) => setSelectedCountry(d))
+        .on("click", (e, feature) => setSelectedCountry(feature))
         .attr("class", "country")
         .attr("fill", (feature) => colorScale(countryCases(feature)))
         .attr("d", (feature) => pathGenerator(feature))
         .attr("transform", "translate(20,200)")
-        .style("cursor", "pointer")
         .append("title")
         .text((feature) => {
           return `cases: ${countryText(feature)}`;
         });
     }
-  }, [coronaData, maxCases, setSelectedCountry]);
+  }, [coronaDataByCountry, maxCases, setSelectedCountry]);
 
   return (
     <svg ref={mapWrapperRef}>
-      <svg ref={svgRef}></svg>
+      <Map ref={svgRef}></Map>
     </svg>
   );
 };
