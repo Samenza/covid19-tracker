@@ -37,7 +37,7 @@ const DoughuntContainer = styled.div`
   padding: 1rem;
 `;
 
-const Title = styled.h4`
+const Title = styled.h3`
   color: #4f5d75;
   font-size: 2vw;
 `;

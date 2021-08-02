@@ -16,6 +16,7 @@ const WorldMap = ({
   setSelectedCountry,
   coronaDataByCountry,
   setCoronaDataByCountry,
+  selectedOptions,
 }) => {
   const svgRef = useRef();
   const coronaDataReadyRef = useRef(false);
@@ -26,13 +27,14 @@ const WorldMap = ({
     let max = 1;
     axios.get("https://corona.lmao.ninja/v2/countries?sort").then((res) => {
       for (let country of res.data) {
-        country.cases > max && (max = country.cases);
+        country[selectedOptions] > max && (max = country[selectedOptions]);
       }
+
       coronaDataReadyRef.current = true;
       setCoronaDataByCountry(res.data);
       setMaxCases(max);
     });
-  }, [setCoronaDataByCountry]);
+  }, [setCoronaDataByCountry, selectedOptions]);
   useEffect(() => {
     if (coronaDataReadyRef.current) {
       const svg = select(svgRef.current);
@@ -48,14 +50,15 @@ const WorldMap = ({
         let data = coronaDataByCountry.filter((country) => {
           return country.countryInfo.iso3 === feature.properties.iso_a3;
         });
-        return data[0] ? data[0].cases : 10;
+
+        return data[0] ? data[0][selectedOptions] : 10;
       };
 
       const countryText = (feature) => {
         let data = coronaDataByCountry.filter((country) => {
           return country.countryInfo.iso3 === feature.properties.iso_a3;
         });
-        return data[0] ? data[0].cases : null;
+        return data[0] ? data[0][selectedOptions] : null;
       };
 
       mapWrapper
@@ -73,7 +76,7 @@ const WorldMap = ({
         .attr("transform", "translate(20,200)")
         .append("title")
         .text((feature) => {
-          return `cases: ${countryText(feature)}`;
+          return `${selectedOptions}: ${countryText(feature)}`;
         });
     }
   }, [coronaDataByCountry, maxCases, setSelectedCountry]);

@@ -5,27 +5,21 @@ const Box = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 35%;
+  width: 30%;
 `;
 const Card = styled.div`
-  height: 15vh;
+  position: relative;
+  height: 12vh;
   width: 70%;
-  box-shadow: 0px -1px 4px 1px #d1d1d199;
   padding: 1rem;
+  box-shadow: 0px 0px 4px 2px ${(props) => props.color.background};
   background-color: #fbfbfb;
   border: 0.5px solid #4f5d7547;
   border-radius: 1rem;
 `;
 
 const TitleCard = styled.div`
-  height: 6vh;
-  width: 70%;
-  box-shadow: 0px -1px 4px 1px #d1d1d199;
-  padding: 1rem;
-  margin: 1rem 0;
-  background-color: #fbfbfb;
-  border: 0.5px solid #4f5d7547;
-  border-radius: 1rem;
+  position: absolute;
 `;
 
 const Title = styled.h3`
@@ -38,11 +32,11 @@ const StatesticCard = ({ color, data, cardChartData }) => {
   const [cardColor] = useState(color);
   return (
     <Box>
-      <TitleCard>
-        <Title>{data.title}</Title>
-        <Title>{data.number}</Title>
-      </TitleCard>
-      <Card>
+      <Card color={cardColor}>
+        <TitleCard>
+          <Title>{data.title}</Title>
+          <Title>{data.number}</Title>
+        </TitleCard>
         <LineChart color={cardColor} chartData={cardChartData} />
       </Card>
     </Box>

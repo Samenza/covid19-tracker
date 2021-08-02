@@ -25,6 +25,14 @@ const MapAndDoughnut = () => {
   const [globalInforamtion, setGlobalinformation] = useState();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [coronaDataByCountry, setCoronaDataByCountry] = useState([]);
+  const [options] = useState([
+    "cases",
+    "active",
+    "critical",
+    "deaths",
+    "recovered",
+  ]);
+  const [selectedOptions, setSelectedOptions] = useState("cases");
 
   const CreateGlobalInformation = (coronaData) => {
     let data = { info: {} };
@@ -66,10 +74,22 @@ const MapAndDoughnut = () => {
       {globalInforamtion && (
         <React.Fragment>
           <MapContainer>
+            <select
+              onChange={(e) => setSelectedOptions(e.target.value)}
+              name="options"
+              id="selectOptions"
+            >
+              {options.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
             <WorldMap
               setSelectedCountry={setSelectedCountry}
               setCoronaDataByCountry={setCoronaDataByCountry}
               coronaDataByCountry={coronaDataByCountry}
+              selectedOptions={selectedOptions}
             />
           </MapContainer>
           <DoughnutChart
