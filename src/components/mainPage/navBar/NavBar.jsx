@@ -2,16 +2,31 @@ import React from "react";
 import styled from "styled-components";
 
 const Nav = styled.nav`
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 10vh;
   background-color: #f5f6f8;
   box-shadow: 4px -5px 11px 1px #c0c0c0;
 `;
 
+const Title = styled.h3`
+  color: #4f5d75;
+  margin: 0;
+`;
+const Logo = styled.img`
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 0.5rem 0 1rem;
+`;
+
 const NavBar = () => {
   return (
     <React.Fragment>
-      <Nav></Nav>
+      <Nav>
+        <Logo src="/logo/logo.png" />
+        <Title>Covid-19 Tracker | global</Title>
+      </Nav>
     </React.Fragment>
   );
 };

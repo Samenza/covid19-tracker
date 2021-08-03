@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const MapContainer = styled.div`
   width: 65%;
-  height: 100%;
+  height: 90%;
   margin-right: 1.5rem;
   background-color: #fbfbfb;
   border-radius: 1rem;
@@ -20,6 +20,25 @@ const MapContainer = styled.div`
   padding: 1rem;
 `;
 
+const Title = styled.h5`
+  text-align: center;
+  margin: 0;
+  color: #4f5d75;
+  font-size: 1.2vw;
+`;
+const Divider = styled.hr`
+  width: 40%;
+  margin: 5px auto;
+  height: 1px;
+  background-color: #c2c2c2;
+  border: none;
+`;
+const SelectOptions = styled.select`
+  outline: none;
+  user-select: none;
+  border-radius: 1rem;
+  padding: 2px;
+`;
 const MapAndDoughnut = () => {
   const [globalCoronaData, setGlobalCoronaData] = useState();
   const [globalInforamtion, setGlobalinformation] = useState();
@@ -74,7 +93,9 @@ const MapAndDoughnut = () => {
       {globalInforamtion && (
         <React.Fragment>
           <MapContainer>
-            <select
+            <Title>World Map | global {selectedOptions}</Title>
+            <Divider />
+            <SelectOptions
               onChange={(e) => setSelectedOptions(e.target.value)}
               name="options"
               id="selectOptions"
@@ -84,7 +105,7 @@ const MapAndDoughnut = () => {
                   {option}
                 </option>
               ))}
-            </select>
+            </SelectOptions>
             <WorldMap
               setSelectedCountry={setSelectedCountry}
               setCoronaDataByCountry={setCoronaDataByCountry}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LineChart from "./../../../../chart/chart";
+import LineChart from "../../../../chart/Chart";
 const Box = styled.section`
   display: flex;
   flex-direction: column;
@@ -20,6 +20,7 @@ const Card = styled.div`
 
 const TitleCard = styled.div`
   position: absolute;
+  font-size: 1vw;
 `;
 
 const Title = styled.h3`

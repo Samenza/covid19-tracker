@@ -63,7 +63,9 @@ const WorldMap = ({
 
       mapWrapper
         .attr("viewBox", "0, 0, 1000, 650")
-        .attr("preserveAspectRatio", "xMidYMid meet");
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .style("width", "100%")
+        .style("height", "90%");
 
       svg
         .selectAll(".country")
@@ -79,7 +81,7 @@ const WorldMap = ({
           return `${selectedOptions}: ${countryText(feature)}`;
         });
     }
-  }, [coronaDataByCountry, maxCases, setSelectedCountry]);
+  }, [coronaDataByCountry, maxCases, setSelectedCountry, selectedOptions]);
 
   return (
     <svg ref={mapWrapperRef}>

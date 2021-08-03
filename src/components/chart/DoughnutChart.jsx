@@ -26,26 +26,28 @@ const data = (data) => {
 };
 
 const DoughuntContainer = styled.div`
-  width: 30%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+  padding: 1rem;
   background-color: #fbfbfb;
   border-radius: 1rem;
   box-shadow: 0 2px 2px 2px #c2c2c2;
-  padding: 1rem;
 `;
 
 const Title = styled.h3`
   color: #4f5d75;
-  font-size: 2vw;
+  font-size: 1.3vw;
+  margin: 0;
 `;
 const Buttun = styled.button`
-  background-color: #f5f6f8;
-  padding: 0.5rem;
+  padding: 0.6rem;
+  margin-top: 1rem;
   border: none;
   border-radius: 4px;
+  background-color: #f5f6f8;
   box-shadow: 0 1px 1px 1px #c2c2c2;
   cursor: pointer;
   &:active {
@@ -53,14 +55,23 @@ const Buttun = styled.button`
     box-shadow: none;
   }
 `;
+const Divider = styled.hr`
+  width: 70%;
+  margin: 0;
+  height: 1px;
+  background-color: #c2c2c2;
+  border: none;
+`;
+
 const DoughnutChart = ({ globalInforamtion, setSelectedCountry }) => {
   return (
     <DoughuntContainer>
-      <Buttun onClick={() => setSelectedCountry(null)}>global statistic</Buttun>
       <Title>
         {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
       </Title>
+      <Divider />
       <Doughnut options={options} data={() => data(globalInforamtion)} />
+      <Buttun onClick={() => setSelectedCountry(null)}>global statistic</Buttun>
     </DoughuntContainer>
   );
 };
