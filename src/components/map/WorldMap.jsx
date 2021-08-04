@@ -25,15 +25,18 @@ const WorldMap = ({
 
   useEffect(() => {
     let max = 1;
-    axios.get("https://corona.lmao.ninja/v2/countries?sort").then((res) => {
-      for (let country of res.data) {
-        country[selectedOptions] > max && (max = country[selectedOptions]);
-      }
+    axios
+      .get("https://corona.lmao.ninja/v2/countries?sort")
+      .then((res) => {
+        for (let country of res.data) {
+          country[selectedOptions] > max && (max = country[selectedOptions]);
+        }
 
-      coronaDataReadyRef.current = true;
-      setCoronaDataByCountry(res.data);
-      setMaxCases(max);
-    });
+        coronaDataReadyRef.current = true;
+        setCoronaDataByCountry(res.data);
+        setMaxCases(max);
+      })
+      .catch(() => alert("worldmap"));
   }, [setCoronaDataByCountry, selectedOptions]);
   useEffect(() => {
     if (coronaDataReadyRef.current) {

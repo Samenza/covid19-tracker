@@ -84,13 +84,12 @@ const GlobalStatChart = () => {
   }, []);
   return (
     <Card>
-      <Title>Global chart | By time</Title>
+      <Title>Global Stats | By time</Title>
       <Divider />
+
       {coronaByTime && (
         <Line
           className="lineChart"
-          width="80%"
-          height="100%"
           data={() => data(coronaByTime)}
           options={options}
         />

@@ -36,8 +36,12 @@ const Divider = styled.hr`
 const SelectOptions = styled.select`
   outline: none;
   user-select: none;
-  border-radius: 1rem;
+  border-radius: 6px;
+  background-color: #4f5d75;
+  color: #ffffff;
   padding: 2px;
+  font-size: 1.1vw;
+  cursor: pointer;
 `;
 const MapAndDoughnut = () => {
   const [globalCoronaData, setGlobalCoronaData] = useState();
@@ -71,7 +75,7 @@ const MapAndDoughnut = () => {
         CreateGlobalInformation(res.data);
       })
       .catch((error) => {
-        alert("error");
+        alert("map and doughnut");
       });
   }, []);
   useEffect(() => {

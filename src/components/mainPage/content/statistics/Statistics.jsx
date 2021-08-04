@@ -47,18 +47,21 @@ const Statistics = () => {
     let recovered = [];
     let deaths = [];
     let data = { cases: [], recovered: [], deaths: [] };
-    axios.get("https://corona.lmao.ninja/v2/historical/all").then((res) => {
-      cases = Object.values(res.data.cases);
-      data.Cases = cases;
+    axios
+      .get("https://corona.lmao.ninja/v2/historical/all")
+      .then((res) => {
+        cases = Object.values(res.data.cases);
+        data.Cases = cases;
 
-      deaths = Object.values(res.data.deaths);
-      data.Deaths = deaths;
+        deaths = Object.values(res.data.deaths);
+        data.Deaths = deaths;
 
-      recovered = Object.values(res.data.recovered);
-      data.Recovered = recovered;
+        recovered = Object.values(res.data.recovered);
+        data.Recovered = recovered;
 
-      setCardChartData(data);
-    });
+        setCardChartData(data);
+      })
+      .catch(() => alert("statistic"));
   }, []);
 
   const colorChoose = (data) => {

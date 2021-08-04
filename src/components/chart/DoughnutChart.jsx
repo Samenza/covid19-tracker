@@ -45,10 +45,12 @@ const Title = styled.h3`
 const Buttun = styled.button`
   padding: 0.6rem;
   margin-top: 1rem;
+  font-size: 1.1vw;
+  background-color: #4f5d75;
+  color: #ffffff;
+  box-shadow: 0 1px 1px 1px #c2c2c2;
   border: none;
   border-radius: 4px;
-  background-color: #f5f6f8;
-  box-shadow: 0 1px 1px 1px #c2c2c2;
   cursor: pointer;
   &:active {
     transform: translateY(2px);
@@ -56,24 +58,28 @@ const Buttun = styled.button`
   }
 `;
 const Divider = styled.hr`
-  width: 70%;
+  width: 80%;
   margin: 0;
   height: 1px;
   background-color: #c2c2c2;
   border: none;
 `;
 
-const DoughnutChart = ({ globalInforamtion, setSelectedCountry }) => {
-  return (
-    <DoughuntContainer>
-      <Title>
-        {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
-      </Title>
-      <Divider />
-      <Doughnut options={options} data={() => data(globalInforamtion)} />
-      <Buttun onClick={() => setSelectedCountry(null)}>global statistic</Buttun>
-    </DoughuntContainer>
-  );
-};
+const DoughnutChart = React.memo(
+  ({ globalInforamtion, setSelectedCountry }) => {
+    return (
+      <DoughuntContainer>
+        <Title>
+          {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
+        </Title>
+        <Divider />
+        <Doughnut options={options} data={() => data(globalInforamtion)} />
+        <Buttun onClick={() => setSelectedCountry(null)}>
+          global statistic
+        </Buttun>
+      </DoughuntContainer>
+    );
+  }
+);
 
 export default DoughnutChart;

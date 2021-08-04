@@ -14,7 +14,6 @@ const Container = styled.section`
 const Content = () => {
   return (
     <Container>
-      {/* <Statistics /> */}
       <GlobalStatChart />
       <MapAndDoughnut />
     </Container>
