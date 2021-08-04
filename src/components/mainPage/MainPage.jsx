@@ -11,7 +11,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dfdfdf;
+  background-color: #0f4c5c;
 `;
 
 const MainPage = () => {

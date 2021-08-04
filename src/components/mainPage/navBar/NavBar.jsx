@@ -5,9 +5,8 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 10vh;
+  height: 8vh;
   background-color: #f5f6f8;
-  box-shadow: 4px -5px 11px 1px #c0c0c0;
   @media (max-width: 1024px) {
     justify-content: center;
   }

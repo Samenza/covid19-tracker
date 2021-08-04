@@ -20,9 +20,8 @@ const MapContainer = styled.div`
   width: 65%;
   height: 90%;
   margin-right: 1.5rem;
-  background-color: #fbfbfb;
-  border-radius: 1rem;
-  box-shadow: 0 2px 2px 2px #c2c2c2;
+  background-color: #f5f6f8;
+  border-radius: 6px;
   padding: 1rem;
   @media (max-width: 1024px) {
     width: 96%;
@@ -37,9 +36,8 @@ const MapContainerOnLoading = styled.div`
   width: 65%;
   height: 90%;
   margin-right: 1.5rem;
-  background-color: #fbfbfb;
-  border-radius: 1rem;
-  box-shadow: 0 2px 2px 2px #c2c2c2;
+  background-color: #f5f6f8;
+  border-radius: 6px;
   padding: 1rem;
 `;
 const DoughuntContainer = styled.div`
@@ -51,8 +49,7 @@ const DoughuntContainer = styled.div`
   height: 90%;
   padding: 1rem;
   background-color: #fbfbfb;
-  border-radius: 1rem;
-  box-shadow: 0 2px 2px 2px #c2c2c2;
+  border-radius: 6px;
   @media (max-width: 1024px) {
     margin: 1rem 0;
     height: 55vh;
@@ -60,13 +57,13 @@ const DoughuntContainer = styled.div`
   }
   @media (max-width: 769px) {
     margin: 1rem 0;
-    height: 60vh;
+    height: 65vh;
     width: 45%;
   }
   @media (max-width: 515px) {
     margin: 1rem 0;
-    height: 60vh;
-    width: 60%;
+    height: 70vh;
+    width: 90%;
   }
   @media (max-width: 400px) {
     margin: 1rem 0;

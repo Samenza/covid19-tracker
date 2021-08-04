@@ -49,10 +49,9 @@ const Card = styled.div`
   width: 100%;
   padding: 1rem 0;
   margin: 1rem 0;
-  box-shadow: 0px 0px 4px 2px #c2c2c2;
   background-color: #fbfbfb;
   border: 0.5px solid #4f5d7547;
-  border-radius: 1rem;
+  border-radius: 6px;
   .lineChart {
     padding: 1rem;
   }
@@ -65,10 +64,9 @@ const CardOnLoad = styled.div`
   width: 100%;
   padding: 1rem 0;
   margin: 1rem 0;
-  box-shadow: 0px 0px 4px 2px #c2c2c2;
-  background-color: #fbfbfb;
+  background-color: #f5f6f8;
   border: 0.5px solid #4f5d7547;
-  border-radius: 1rem;
+  border-radius: 6px;
 `;
 
 const Title = styled.h3`

@@ -7,7 +7,6 @@ const FooterContainer = styled.footer`
   height: 5vh;
   color: #747474;
   background-color: #f5f6f8;
-  box-shadow: -7px 1px 4px 2px #a7a7a7;
   text-align: center;
 `;
 const Motto = styled.h5`
