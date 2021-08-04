@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import DoughnutChart from "../../../../chart/DoughnutChart";
 import axios from "axios";
-import WorldMap from "../../../../map/worldMap";
+import WorldMap from "../../../../map/WorldMap";
 
 const Container = styled.div`
   width: 100%;
