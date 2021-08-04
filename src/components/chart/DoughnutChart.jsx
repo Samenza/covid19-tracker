@@ -25,18 +25,6 @@ const data = (data) => {
   };
 };
 
-const DoughuntContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 30%;
-  padding: 1rem;
-  background-color: #fbfbfb;
-  border-radius: 1rem;
-  box-shadow: 0 2px 2px 2px #c2c2c2;
-`;
-
 const Title = styled.h3`
   color: #4f5d75;
   font-size: 1.3vw;
@@ -68,7 +56,7 @@ const Divider = styled.hr`
 const DoughnutChart = React.memo(
   ({ globalInforamtion, setSelectedCountry }) => {
     return (
-      <DoughuntContainer>
+      <React.Fragment>
         <Title>
           {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
         </Title>
@@ -77,7 +65,7 @@ const DoughnutChart = React.memo(
         <Buttun onClick={() => setSelectedCountry(null)}>
           global statistic
         </Buttun>
-      </DoughuntContainer>
+      </React.Fragment>
     );
   }
 );

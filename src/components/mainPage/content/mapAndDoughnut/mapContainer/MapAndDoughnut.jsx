@@ -6,7 +6,7 @@ import WorldMap from "../../../../map/WorldMap";
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 70vh;
   display: flex;
 `;
 
@@ -19,7 +19,30 @@ const MapContainer = styled.div`
   box-shadow: 0 2px 2px 2px #c2c2c2;
   padding: 1rem;
 `;
-
+const MapContainerOnLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+  height: 90%;
+  margin-right: 1.5rem;
+  background-color: #fbfbfb;
+  border-radius: 1rem;
+  box-shadow: 0 2px 2px 2px #c2c2c2;
+  padding: 1rem;
+`;
+const DoughuntContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+  height: 90%;
+  padding: 1rem;
+  background-color: #fbfbfb;
+  border-radius: 1rem;
+  box-shadow: 0 2px 2px 2px #c2c2c2;
+`;
 const Title = styled.h5`
   text-align: center;
   margin: 0;
@@ -43,6 +66,10 @@ const SelectOptions = styled.select`
   font-size: 1.1vw;
   cursor: pointer;
 `;
+const Loading = styled.img`
+  width: 4vw;
+  height: 4vw;
+`;
 const MapAndDoughnut = () => {
   const [globalCoronaData, setGlobalCoronaData] = useState();
   const [globalInforamtion, setGlobalinformation] = useState();
@@ -56,6 +83,7 @@ const MapAndDoughnut = () => {
     "recovered",
   ]);
   const [selectedOptions, setSelectedOptions] = useState("cases");
+  const [error, setError] = useState("");
 
   const CreateGlobalInformation = (coronaData) => {
     let data = { info: {} };
@@ -75,7 +103,7 @@ const MapAndDoughnut = () => {
         CreateGlobalInformation(res.data);
       })
       .catch((error) => {
-        alert("map and doughnut");
+        setError("error");
       });
   }, []);
   useEffect(() => {
@@ -93,9 +121,9 @@ const MapAndDoughnut = () => {
     }
   }, [selectedCountry, coronaDataByCountry, globalCoronaData]);
   return (
-    <Container>
-      {globalInforamtion && (
-        <React.Fragment>
+    <React.Fragment>
+      {globalInforamtion ? (
+        <Container>
           <MapContainer>
             <Title>World Map | global {selectedOptions}</Title>
             <Divider />
@@ -117,14 +145,39 @@ const MapAndDoughnut = () => {
               selectedOptions={selectedOptions}
             />
           </MapContainer>
-          <DoughnutChart
-            globalInforamtion={globalInforamtion}
-            selectedCountry={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
-          />
+
+          <DoughuntContainer>
+            <DoughnutChart
+              globalInforamtion={globalInforamtion}
+              selectedCountry={selectedCountry}
+              setSelectedCountry={setSelectedCountry}
+            />
+          </DoughuntContainer>
+        </Container>
+      ) : (
+        <React.Fragment>
+          {error ? (
+            <Container>
+              <MapContainerOnLoading>
+                <p>cant find data</p>
+              </MapContainerOnLoading>
+              <DoughuntContainer>
+                <p>cant find data</p>
+              </DoughuntContainer>
+            </Container>
+          ) : (
+            <Container>
+              <MapContainerOnLoading>
+                <Loading src="/loading/Rotating globe.gif" />
+              </MapContainerOnLoading>
+              <DoughuntContainer>
+                <Loading src="/loading/rip.gif" />
+              </DoughuntContainer>
+            </Container>
+          )}
         </React.Fragment>
       )}
-    </Container>
+    </React.Fragment>
   );
 };
 

@@ -57,6 +57,20 @@ const Card = styled.div`
     padding: 1rem;
   }
 `;
+const CardOnLoad = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  width: 100%;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  box-shadow: 0px 0px 4px 2px #c2c2c2;
+  background-color: #fbfbfb;
+  border: 0.5px solid #4f5d7547;
+  border-radius: 1rem;
+`;
+
 const Title = styled.h3`
   margin: 0;
   font-size: 1.1vw;
@@ -70,31 +84,49 @@ const Divider = styled.hr`
   border: none;
   margin: 5px auto;
 `;
+const Loading = styled.img`
+  width: 4vw;
+  height: 4vw;
+`;
+
+const ErrorText = styled.p``;
+
 const GlobalStatChart = () => {
   const [coronaByTime, setCoronaByTime] = useState();
+  const [error, setError] = useState("");
+
   useEffect(() => {
     axios
       .get("https://corona.lmao.ninja/v2/historical/all")
       .then((res) => {
         setCoronaByTime(res.data);
       })
-      .catch((error) => {
-        console.log("error");
-      });
+      .catch((error) => setError(error));
   }, []);
   return (
-    <Card>
-      <Title>Global Stats | By time</Title>
-      <Divider />
-
-      {coronaByTime && (
-        <Line
-          className="lineChart"
-          data={() => data(coronaByTime)}
-          options={options}
-        />
+    <React.Fragment>
+      {coronaByTime ? (
+        <Card>
+          <Title>Global Stats | By time</Title>
+          <Divider />
+          {coronaByTime && (
+            <Line
+              className="lineChart"
+              data={() => data(coronaByTime)}
+              options={options}
+            />
+          )}
+        </Card>
+      ) : (
+        <CardOnLoad>
+          {error ? (
+            <ErrorText>cant find data</ErrorText>
+          ) : (
+            <Loading src="/loading/rip.gif" />
+          )}
+        </CardOnLoad>
       )}
-    </Card>
+    </React.Fragment>
   );
 };
 
