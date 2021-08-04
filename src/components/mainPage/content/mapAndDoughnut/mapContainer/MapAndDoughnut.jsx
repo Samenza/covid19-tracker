@@ -8,6 +8,12 @@ const Container = styled.div`
   width: 100%;
   height: 70vh;
   display: flex;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
 `;
 
 const MapContainer = styled.div`
@@ -18,6 +24,11 @@ const MapContainer = styled.div`
   border-radius: 1rem;
   box-shadow: 0 2px 2px 2px #c2c2c2;
   padding: 1rem;
+  @media (max-width: 1024px) {
+    width: 96%;
+    margin: 0;
+    padding: 2vw;
+  }
 `;
 const MapContainerOnLoading = styled.div`
   display: flex;
@@ -42,12 +53,39 @@ const DoughuntContainer = styled.div`
   background-color: #fbfbfb;
   border-radius: 1rem;
   box-shadow: 0 2px 2px 2px #c2c2c2;
+  @media (max-width: 1024px) {
+    margin: 1rem 0;
+    height: 55vh;
+    width: 35%;
+  }
+  @media (max-width: 769px) {
+    margin: 1rem 0;
+    height: 60vh;
+    width: 45%;
+  }
+  @media (max-width: 515px) {
+    margin: 1rem 0;
+    height: 60vh;
+    width: 60%;
+  }
+  @media (max-width: 400px) {
+    margin: 1rem 0;
+    height: 60vh;
+    width: 90%;
+  }
+  @media (max-width: 300px) {
+    margin: 1rem 0;
+    height: 50vh;
+    width: 90%;
+  }
 `;
-const Title = styled.h5`
+const Title = styled.h3`
   text-align: center;
   margin: 0;
   color: #4f5d75;
-  font-size: 1.2vw;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
 `;
 const Divider = styled.hr`
   width: 40%;
@@ -63,7 +101,9 @@ const SelectOptions = styled.select`
   background-color: #4f5d75;
   color: #ffffff;
   padding: 2px;
-  font-size: 1.1vw;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
   cursor: pointer;
 `;
 const Loading = styled.img`

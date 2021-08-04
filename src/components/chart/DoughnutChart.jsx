@@ -27,19 +27,23 @@ const data = (data) => {
 
 const Title = styled.h3`
   color: #4f5d75;
-  font-size: 1.3vw;
   margin: 0;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
 `;
 const Buttun = styled.button`
   padding: 0.6rem;
   margin-top: 1rem;
-  font-size: 1.1vw;
   background-color: #4f5d75;
   color: #ffffff;
   box-shadow: 0 1px 1px 1px #c2c2c2;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
   &:active {
     transform: translateY(2px);
     box-shadow: none;

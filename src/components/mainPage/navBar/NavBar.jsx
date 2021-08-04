@@ -8,11 +8,17 @@ const Nav = styled.nav`
   height: 10vh;
   background-color: #f5f6f8;
   box-shadow: 4px -5px 11px 1px #c0c0c0;
+  @media (max-width: 1024px) {
+    justify-content: center;
+  }
 `;
 
 const Title = styled.h3`
   color: #4f5d75;
   margin: 0;
+  @media (max-width: 429px) {
+    font-size: 5vw;
+  }
 `;
 const Logo = styled.img`
   width: 2.5rem;

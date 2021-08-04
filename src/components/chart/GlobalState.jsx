@@ -73,9 +73,11 @@ const CardOnLoad = styled.div`
 
 const Title = styled.h3`
   margin: 0;
-  font-size: 1.1vw;
   color: #4f5d75;
   text-align: center;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
 `;
 const Divider = styled.hr`
   width: 20%;

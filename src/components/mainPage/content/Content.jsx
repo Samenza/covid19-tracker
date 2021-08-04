@@ -9,6 +9,11 @@ const Container = styled.section`
   padding: 0.4rem 2rem;
   margin: 1rem 0;
   width: 80%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    padding: 0;
+  }
 `;
 
 const Content = () => {

@@ -14,6 +14,9 @@ const Motto = styled.h5`
   margin: 0;
   letter-spacing: 2px;
   padding: 8px;
+  @media (max-width: 429px) {
+    font-size: 4vw;
+  }
 `;
 const MottoPlus = styled.span`
   margin: 0;
