@@ -157,63 +157,66 @@ const MapAndDoughnut = () => {
       }
     }
   }, [selectedCountry, coronaDataByCountry, globalCoronaData]);
-  return (
-    <React.Fragment>
-      {globalInforamtion ? (
-        <Container>
-          <MapContainer>
-            <Title>World Map | global {selectedOptions}</Title>
-            <Divider />
-            <SelectOptions
-              onChange={(e) => setSelectedOptions(e.target.value)}
-              name="options"
-              id="selectOptions"
-            >
-              {options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </SelectOptions>
-            <WorldMap
-              setSelectedCountry={setSelectedCountry}
-              setCoronaDataByCountry={setCoronaDataByCountry}
-              coronaDataByCountry={coronaDataByCountry}
-              selectedOptions={selectedOptions}
-            />
-          </MapContainer>
 
+  const ContainerRender = (
+    <Container>
+      <MapContainer>
+        <Title>World Map | global {selectedOptions}</Title>
+        <Divider />
+        <SelectOptions
+          onChange={(e) => setSelectedOptions(e.target.value)}
+          name="options"
+          id="selectOptions"
+        >
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </SelectOptions>
+        <WorldMap
+          setSelectedCountry={setSelectedCountry}
+          setCoronaDataByCountry={setCoronaDataByCountry}
+          coronaDataByCountry={coronaDataByCountry}
+          selectedOptions={selectedOptions}
+        />
+      </MapContainer>
+
+      <DoughuntContainer>
+        <DoughnutChart
+          globalInforamtion={globalInforamtion}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
+      </DoughuntContainer>
+    </Container>
+  );
+  const containerRenderOnError = (
+    <React.Fragment>
+      {error ? (
+        <Container>
+          <MapContainerOnLoading>
+            <p>cant find data</p>
+          </MapContainerOnLoading>
           <DoughuntContainer>
-            <DoughnutChart
-              globalInforamtion={globalInforamtion}
-              selectedCountry={selectedCountry}
-              setSelectedCountry={setSelectedCountry}
-            />
+            <p>cant find data</p>
           </DoughuntContainer>
         </Container>
       ) : (
-        <React.Fragment>
-          {error ? (
-            <Container>
-              <MapContainerOnLoading>
-                <p>cant find data</p>
-              </MapContainerOnLoading>
-              <DoughuntContainer>
-                <p>cant find data</p>
-              </DoughuntContainer>
-            </Container>
-          ) : (
-            <Container>
-              <MapContainerOnLoading>
-                <Loading src="/loading/Rotating globe.gif" />
-              </MapContainerOnLoading>
-              <DoughuntContainer>
-                <Loading src="/loading/rip.gif" />
-              </DoughuntContainer>
-            </Container>
-          )}
-        </React.Fragment>
+        <Container>
+          <MapContainerOnLoading>
+            <Loading src="/loading/Rotating globe.gif" />
+          </MapContainerOnLoading>
+          <DoughuntContainer>
+            <Loading src="/loading/rip.gif" />
+          </DoughuntContainer>
+        </Container>
       )}
+    </React.Fragment>
+  );
+  return (
+    <React.Fragment>
+      {globalInforamtion ? ContainerRender : containerRenderOnError}
     </React.Fragment>
   );
 };

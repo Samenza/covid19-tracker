@@ -56,17 +56,10 @@ const Card = styled.div`
     padding: 1rem;
   }
 `;
-const CardOnLoad = styled.div`
+const CardOnLoad = styled(Card)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
-  width: 100%;
-  padding: 1rem 0;
-  margin: 1rem 0;
-  background-color: #f5f6f8;
-  border: 0.5px solid #4f5d7547;
-  border-radius: 6px;
 `;
 
 const Title = styled.h3`
@@ -103,29 +96,31 @@ const GlobalStatChart = () => {
       })
       .catch((error) => setError(error));
   }, []);
+  const cardRender = (
+    <Card>
+      <Title>Global Stats | By time</Title>
+      <Divider />
+      {coronaByTime && (
+        <Line
+          className="lineChart"
+          data={() => data(coronaByTime)}
+          options={options}
+        />
+      )}
+    </Card>
+  );
+  const cardRenderOnLoad = (
+    <CardOnLoad>
+      {error ? (
+        <ErrorText>cant find data</ErrorText>
+      ) : (
+        <Loading src="/loading/rip.gif" />
+      )}
+    </CardOnLoad>
+  );
   return (
     <React.Fragment>
-      {coronaByTime ? (
-        <Card>
-          <Title>Global Stats | By time</Title>
-          <Divider />
-          {coronaByTime && (
-            <Line
-              className="lineChart"
-              data={() => data(coronaByTime)}
-              options={options}
-            />
-          )}
-        </Card>
-      ) : (
-        <CardOnLoad>
-          {error ? (
-            <ErrorText>cant find data</ErrorText>
-          ) : (
-            <Loading src="/loading/rip.gif" />
-          )}
-        </CardOnLoad>
-      )}
+      {coronaByTime ? cardRender : cardRenderOnLoad}
     </React.Fragment>
   );
 };
