@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import NavBar from "./navBar/NavBar";
 import styled from "styled-components";
 import Content from "./content/Content";
 import Footer from "./footer/Footer";
 
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #0f4c5c;
-`;
-
+export const MainPageContext = createContext();
+const lightTheme = {
+  background: "#95a4a7",
+};
+const darkTheme = {
+  background: "#0f4c5c",
+};
+const themes = {
+  light: lightTheme,
+  dark: darkTheme,
+};
 const MainPage = () => {
   //dark mood coming soon :)
   const [theme, setTheme] = useState("light");
   return (
-    <React.Fragment>
-      <NavBar setTheme={setTheme} />
-      <ContentContainer>
-        <Content />
-      </ContentContainer>
+    <MainPageContext.Provider value={{ themes, theme, setTheme }}>
+      <NavBar />
+      <Content />
       <Footer />
-    </React.Fragment>
+    </MainPageContext.Provider>
   );
 };
 

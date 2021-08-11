@@ -41,6 +41,24 @@ const data = (data) => {
 };
 const options = {
   maintainAspectRatio: false,
+  // scales: {
+  //   xAxes: {
+  //     grid: {
+  //       color: "#ffffff71",
+  //     },
+  //     ticks: {
+  //       color: "#ffffff",
+  //     },
+  //   },
+  //   yAxes: {
+  //     grid: {
+  //       color: "#ffffff71",
+  //     },
+  //     ticks: {
+  //       color: "#ffffff",
+  //     },
+  //   },
+  // },
 };
 
 const Card = styled.div`
