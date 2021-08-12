@@ -8,14 +8,14 @@ const Nav = styled.nav`
   justify-content: space-between;
   width: 100%;
   height: 8vh;
-  background-color: #f5f6f8;
+  background-color: ${(props) => props.theme.secondBackground};
   @media (max-width: 1024px) {
     justify-content: center;
   }
 `;
 
 const Title = styled.h3`
-  color: #4f5d75;
+  color: ${(props) => props.theme.text};
   margin: 0;
   @media (max-width: 429px) {
     font-size: 5vw;
@@ -28,17 +28,22 @@ const Logo = styled.img`
 `;
 const LogoWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
-const NavBar = () => {
+const NavBar = ({ themes, theme, setTheme }) => {
   return (
     <React.Fragment>
-      <Nav>
+      <Nav theme={themes[theme]}>
         <LogoWrapper>
-          <Logo src="/logo/logo.png" />
-          <Title>Covid-19 Tracker | global</Title>
+          {theme === "light" ? (
+            <Logo src="/logo/logo.png" />
+          ) : (
+            <Logo src="/logo/logoForDark.png" />
+          )}
+          <Title theme={themes[theme]}>Covid-19 Tracker | global</Title>
         </LogoWrapper>
-        <ToggleButton />
+        <ToggleButton setTheme={setTheme} theme={theme} />
       </Nav>
     </React.Fragment>
   );

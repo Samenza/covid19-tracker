@@ -5,8 +5,8 @@ const FooterContainer = styled.footer`
   bottom: 0;
   width: 100%;
   height: 5vh;
-  color: #747474;
-  background-color: #f5f6f8;
+  color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.secondBackground};
   text-align: center;
 `;
 const Motto = styled.h5`
@@ -21,12 +21,12 @@ const MottoPlus = styled.span`
   margin: 0;
   color: #0d4dba;
 `;
-const Footer = () => {
+const Footer = ({ theme }) => {
   return (
-    <FooterContainer>
+    <FooterContainer theme={theme}>
       <Motto>
         Stay Home , Be <MottoPlus>Safe </MottoPlus> from
-        <MottoPlus> Corona</MottoPlus>
+        <MottoPlus theme={theme}> Corona</MottoPlus>
       </Motto>
     </FooterContainer>
   );

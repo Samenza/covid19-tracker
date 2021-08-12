@@ -12,85 +12,87 @@ const Map = styled.svg`
   }
 `;
 
-const WorldMap = ({
-  setSelectedCountry,
-  coronaDataByCountry,
-  setCoronaDataByCountry,
-  selectedOptions,
-}) => {
-  const svgRef = useRef();
-  const coronaDataReadyRef = useRef(false);
-  const mapWrapperRef = useRef();
-  const [maxCases, setMaxCases] = useState(1);
+const WorldMap = React.memo(
+  ({
+    setSelectedCountry,
+    coronaDataByCountry,
+    setCoronaDataByCountry,
+    selectedOptions,
+  }) => {
+    const svgRef = useRef();
+    const coronaDataReadyRef = useRef(false);
+    const mapWrapperRef = useRef();
+    const [maxCases, setMaxCases] = useState(1);
 
-  useEffect(() => {
-    let max = 1;
-    axios
-      .get("https://corona.lmao.ninja/v2/countries?sort")
-      .then((res) => {
-        for (let country of res.data) {
-          country[selectedOptions] > max && (max = country[selectedOptions]);
-        }
+    useEffect(() => {
+      let max = 1;
+      axios
+        .get("https://corona.lmao.ninja/v2/countries?sort")
+        .then((res) => {
+          for (let country of res.data) {
+            country[selectedOptions] > max && (max = country[selectedOptions]);
+          }
 
-        coronaDataReadyRef.current = true;
-        setCoronaDataByCountry(res.data);
-        setMaxCases(max);
-      })
-      .catch(() => alert("worldmap"));
-  }, [setCoronaDataByCountry, selectedOptions]);
-  useEffect(() => {
-    if (coronaDataReadyRef.current) {
-      const svg = select(svgRef.current);
-      const mapWrapper = select(mapWrapperRef.current);
-      const projection = geoMercator();
-      const pathGenerator = geoPath().projection(projection);
+          coronaDataReadyRef.current = true;
+          setCoronaDataByCountry(res.data);
+          setMaxCases(max);
+        })
+        .catch(() => alert("cant get data"));
+    }, [setCoronaDataByCountry, selectedOptions]);
+    useEffect(() => {
+      if (coronaDataReadyRef.current) {
+        const svg = select(svgRef.current);
+        const mapWrapper = select(mapWrapperRef.current);
+        const projection = geoMercator();
+        const pathGenerator = geoPath().projection(projection);
 
-      const colorScale = scaleLinear()
-        .domain([0, maxCases / 10])
-        .range(["#d4bbbb", "#ca0000"]);
+        const colorScale = scaleLinear()
+          .domain([0, maxCases / 10])
+          .range(["#d4bbbb", "#ca0000"]);
 
-      const countryCases = (feature) => {
-        let data = coronaDataByCountry.filter((country) => {
-          return country.countryInfo.iso3 === feature.properties.iso_a3;
-        });
+        const countryCases = (feature) => {
+          let data = coronaDataByCountry.filter((country) => {
+            return country.countryInfo.iso3 === feature.properties.iso_a3;
+          });
 
-        return data[0] ? data[0][selectedOptions] : 10;
-      };
+          return data[0] ? data[0][selectedOptions] : 10;
+        };
 
-      const countryText = (feature) => {
-        let data = coronaDataByCountry.filter((country) => {
-          return country.countryInfo.iso3 === feature.properties.iso_a3;
-        });
-        return data[0] ? data[0][selectedOptions] : null;
-      };
+        const countryText = (feature) => {
+          let data = coronaDataByCountry.filter((country) => {
+            return country.countryInfo.iso3 === feature.properties.iso_a3;
+          });
+          return data[0] ? data[0][selectedOptions] : null;
+        };
 
-      mapWrapper
-        .attr("viewBox", "0, 0, 1000, 650")
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        .style("width", "100%")
-        .style("height", "90%");
+        mapWrapper
+          .attr("viewBox", "0, 0, 1000, 650")
+          .attr("preserveAspectRatio", "xMidYMid meet")
+          .style("width", "100%")
+          .style("height", "90%");
 
-      svg
-        .selectAll(".country")
-        .data(data.features)
-        .join("path")
-        .on("click", (e, feature) => setSelectedCountry(feature))
-        .attr("class", "country")
-        .attr("fill", (feature) => colorScale(countryCases(feature)))
-        .attr("d", (feature) => pathGenerator(feature))
-        .attr("transform", "translate(20,200)")
-        .append("title")
-        .text((feature) => {
-          return `${selectedOptions}: ${countryText(feature)}`;
-        });
-    }
-  }, [coronaDataByCountry, maxCases, setSelectedCountry, selectedOptions]);
+        svg
+          .selectAll(".country")
+          .data(data.features)
+          .join("path")
+          .on("click", (e, feature) => setSelectedCountry(feature))
+          .attr("class", "country")
+          .attr("fill", (feature) => colorScale(countryCases(feature)))
+          .attr("d", (feature) => pathGenerator(feature))
+          .attr("transform", "translate(20,200)")
+          .append("title")
+          .text((feature) => {
+            return `${selectedOptions}: ${countryText(feature)}`;
+          });
+      }
+    }, [coronaDataByCountry, maxCases, setSelectedCountry, selectedOptions]);
 
-  return (
-    <svg ref={mapWrapperRef}>
-      <Map ref={svgRef}></Map>
-    </svg>
-  );
-};
+    return (
+      <svg ref={mapWrapperRef}>
+        <Map ref={svgRef}></Map>
+      </svg>
+    );
+  }
+);
 
 export default WorldMap;

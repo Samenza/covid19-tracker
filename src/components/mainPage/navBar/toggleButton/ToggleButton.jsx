@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { MainPageContext } from "./../../MainPage";
 
 const ToggleWrapper = styled.div`
   position: relative;
@@ -45,26 +44,23 @@ const Toggle = styled.input`
     }
   }
 `;
-const ToggleButton = () => {
-  const changeTheme = (setTheme) => {
-    console.log(setTheme);
-    // if (setTheme === "light") {
-    //   se;
-    // }
+const ToggleButton = (theme) => {
+  const changeTheme = ({ setTheme, theme }) => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
   return (
-    <MainPageContext.Consumer>
-      {({ setTheme }) => (
-        <ToggleWrapper>
-          <Toggle
-            onChange={() => changeTheme(setTheme)}
-            id="ToggleButton"
-            type="checkbox"
-          />
-          <ToggleLable htmlFor="ToggleButton" />
-        </ToggleWrapper>
-      )}
-    </MainPageContext.Consumer>
+    <ToggleWrapper>
+      <Toggle
+        onChange={() => changeTheme(theme)}
+        id="ToggleButton"
+        type="checkbox"
+      />
+      <ToggleLable htmlFor="ToggleButton" />
+    </ToggleWrapper>
   );
 };
 

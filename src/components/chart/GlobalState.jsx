@@ -39,27 +39,6 @@ const data = (data) => {
     ],
   };
 };
-const options = {
-  maintainAspectRatio: false,
-  // scales: {
-  //   xAxes: {
-  //     grid: {
-  //       color: "#ffffff71",
-  //     },
-  //     ticks: {
-  //       color: "#ffffff",
-  //     },
-  //   },
-  //   yAxes: {
-  //     grid: {
-  //       color: "#ffffff71",
-  //     },
-  //     ticks: {
-  //       color: "#ffffff",
-  //     },
-  //   },
-  // },
-};
 
 const Card = styled.div`
   position: relative;
@@ -67,8 +46,7 @@ const Card = styled.div`
   width: 100%;
   padding: 1rem 0;
   margin: 1rem 0;
-  background-color: #fbfbfb;
-  border: 0.5px solid #4f5d7547;
+  background-color: ${(props) => props.theme.secondBackground};
   border-radius: 6px;
   .lineChart {
     padding: 1rem;
@@ -82,7 +60,7 @@ const CardOnLoad = styled(Card)`
 
 const Title = styled.h3`
   margin: 0;
-  color: #4f5d75;
+  color: ${(props) => props.theme.text};
   text-align: center;
   @media (max-width: 429px) {
     font-size: 4vw;
@@ -102,9 +80,38 @@ const Loading = styled.img`
 
 const ErrorText = styled.p``;
 
-const GlobalStatChart = () => {
+const GlobalStatChart = React.memo(({ theme }) => {
   const [coronaByTime, setCoronaByTime] = useState();
   const [error, setError] = useState("");
+  //chart option is here ...pass theme to options in this way work fine
+  const options = {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: theme.text,
+        },
+      },
+    },
+    scales: {
+      xAxes: {
+        grid: {
+          color: theme.chartColorGrid,
+        },
+        ticks: {
+          color: theme.text,
+        },
+      },
+      yAxes: {
+        grid: {
+          color: theme.chartColorGrid,
+        },
+        ticks: {
+          color: theme.text,
+        },
+      },
+    },
+  };
 
   useEffect(() => {
     axios
@@ -115,8 +122,8 @@ const GlobalStatChart = () => {
       .catch((error) => setError(error));
   }, []);
   const cardRender = (
-    <Card>
-      <Title>Global Stats | By time</Title>
+    <Card theme={theme}>
+      <Title theme={theme}>Global Stats | By time</Title>
       <Divider />
       {coronaByTime && (
         <Line
@@ -141,6 +148,6 @@ const GlobalStatChart = () => {
       {coronaByTime ? cardRender : cardRenderOnLoad}
     </React.Fragment>
   );
-};
+});
 
 export default GlobalStatChart;

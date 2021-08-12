@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import MapAndDoughnut from "./mapAndDoughnut/mapContainer/MapAndDoughnut";
 import GlobalStatChart from "./../../chart/GlobalState";
-import { MainPageContext } from "./../MainPage";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -23,18 +22,14 @@ const Container = styled.section`
   }
 `;
 
-const Content = () => {
+const Content = ({ theme }) => {
   return (
-    <MainPageContext.Consumer>
-      {({ themes, theme }) => (
-        <ContentContainer theme={themes[theme]}>
-          <Container>
-            <GlobalStatChart />
-            <MapAndDoughnut />
-          </Container>
-        </ContentContainer>
-      )}
-    </MainPageContext.Consumer>
+    <ContentContainer theme={theme}>
+      <Container>
+        <GlobalStatChart theme={theme} />
+        <MapAndDoughnut theme={theme} />
+      </Container>
+    </ContentContainer>
   );
 };
 

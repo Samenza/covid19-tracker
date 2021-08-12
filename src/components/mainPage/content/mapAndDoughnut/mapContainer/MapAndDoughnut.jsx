@@ -20,7 +20,7 @@ const MapContainer = styled.div`
   width: 65%;
   height: 90%;
   margin-right: 1.5rem;
-  background-color: #f5f6f8;
+  background-color: ${(props) => props.theme.secondBackground};
   border-radius: 6px;
   padding: 1rem;
   @media (max-width: 1024px) {
@@ -29,16 +29,10 @@ const MapContainer = styled.div`
     padding: 2vw;
   }
 `;
-const MapContainerOnLoading = styled.div`
+const MapContainerOnLoading = styled(MapContainer)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65%;
-  height: 90%;
-  margin-right: 1.5rem;
-  background-color: #f5f6f8;
-  border-radius: 6px;
-  padding: 1rem;
 `;
 const DoughuntContainer = styled.div`
   display: flex;
@@ -48,7 +42,7 @@ const DoughuntContainer = styled.div`
   width: 30%;
   height: 90%;
   padding: 1rem;
-  background-color: #fbfbfb;
+  background-color: ${(props) => props.theme.secondBackground};
   border-radius: 6px;
   @media (max-width: 1024px) {
     margin: 1rem 0;
@@ -79,7 +73,7 @@ const DoughuntContainer = styled.div`
 const Title = styled.h3`
   text-align: center;
   margin: 0;
-  color: #4f5d75;
+  color: ${(props) => props.theme.text};
   @media (max-width: 429px) {
     font-size: 4vw;
   }
@@ -95,8 +89,8 @@ const SelectOptions = styled.select`
   outline: none;
   user-select: none;
   border-radius: 6px;
-  background-color: #4f5d75;
-  color: #ffffff;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secondText};
   padding: 2px;
   @media (max-width: 429px) {
     font-size: 4vw;
@@ -107,7 +101,7 @@ const Loading = styled.img`
   width: 4vw;
   height: 4vw;
 `;
-const MapAndDoughnut = () => {
+const MapAndDoughnut = ({ theme }) => {
   const [globalCoronaData, setGlobalCoronaData] = useState();
   const [globalInforamtion, setGlobalinformation] = useState();
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -160,13 +154,14 @@ const MapAndDoughnut = () => {
 
   const ContainerRender = (
     <Container>
-      <MapContainer>
-        <Title>World Map | global {selectedOptions}</Title>
+      <MapContainer theme={theme}>
+        <Title theme={theme}>World Map | global {selectedOptions}</Title>
         <Divider />
         <SelectOptions
           onChange={(e) => setSelectedOptions(e.target.value)}
           name="options"
           id="selectOptions"
+          theme={theme}
         >
           {options.map((option) => (
             <option key={option} value={option}>
@@ -182,11 +177,12 @@ const MapAndDoughnut = () => {
         />
       </MapContainer>
 
-      <DoughuntContainer>
+      <DoughuntContainer theme={theme}>
         <DoughnutChart
           globalInforamtion={globalInforamtion}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
+          theme={theme}
         />
       </DoughuntContainer>
     </Container>
@@ -198,7 +194,7 @@ const MapAndDoughnut = () => {
           <MapContainerOnLoading>
             <p>cant find data</p>
           </MapContainerOnLoading>
-          <DoughuntContainer>
+          <DoughuntContainer theme={theme}>
             <p>cant find data</p>
           </DoughuntContainer>
         </Container>
@@ -207,7 +203,7 @@ const MapAndDoughnut = () => {
           <MapContainerOnLoading>
             <Loading src="/loading/Rotating globe.gif" />
           </MapContainerOnLoading>
-          <DoughuntContainer>
+          <DoughuntContainer theme={theme}>
             <Loading src="/loading/rip.gif" />
           </DoughuntContainer>
         </Container>

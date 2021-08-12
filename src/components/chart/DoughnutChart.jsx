@@ -2,14 +2,6 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 
-const options = {
-  maintainAspectRatio: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-  },
-};
 const data = (data) => {
   let title = Object.keys(data.info);
   let value = Object.values(data.info);
@@ -26,7 +18,7 @@ const data = (data) => {
 };
 
 const Title = styled.h3`
-  color: #4f5d75;
+  color: ${(props) => props.theme.text};
   margin: 0;
   @media (max-width: 429px) {
     font-size: 4vw;
@@ -35,9 +27,9 @@ const Title = styled.h3`
 const Buttun = styled.button`
   padding: 0.6rem;
   margin-top: 1rem;
-  background-color: #4f5d75;
-  color: #ffffff;
-  box-shadow: 0 1px 1px 1px #c2c2c2;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.secondText};
+  box-shadow: 0 1px 1px 1px ${(props) => props.theme.chartColorGrid};
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -58,15 +50,26 @@ const Divider = styled.hr`
 `;
 
 const DoughnutChart = React.memo(
-  ({ globalInforamtion, setSelectedCountry }) => {
+  ({ globalInforamtion, setSelectedCountry, theme }) => {
+    const options = {
+      maintainAspectRatio: true,
+      plugins: {
+        legend: {
+          position: "top",
+          labels: {
+            color: theme.text,
+          },
+        },
+      },
+    };
     return (
       <React.Fragment>
-        <Title>
+        <Title theme={theme}>
           {globalInforamtion.name ? globalInforamtion.name : "Global Statistic"}
         </Title>
         <Divider />
         <Doughnut options={options} data={() => data(globalInforamtion)} />
-        <Buttun onClick={() => setSelectedCountry(null)}>
+        <Buttun onClick={() => setSelectedCountry(null)} theme={theme}>
           global statistic
         </Buttun>
       </React.Fragment>
