@@ -1,8 +1,10 @@
+import React from "react";
 import styled from "styled-components";
-
+import { HiMoon } from "react-icons/hi";
+import { FaSun } from "react-icons/fa";
 const ToggleWrapper = styled.div`
   position: relative;
-  margin-right: 2rem;
+  margin: 0 1rem 0 0.5rem;
 `;
 
 const ToggleLable = styled.label`
@@ -44,6 +46,15 @@ const Toggle = styled.input`
     }
   }
 `;
+
+const DarkMoodWrapper = styled.div`
+  display: flex;
+  .icon {
+    font-size: 1.5rem;
+    color: ${(props) => props.theme.text};
+  }
+`;
+
 const ToggleButton = (theme) => {
   const changeTheme = ({ setTheme, theme }) => {
     if (theme === "light") {
@@ -53,14 +64,21 @@ const ToggleButton = (theme) => {
     }
   };
   return (
-    <ToggleWrapper>
-      <Toggle
-        onChange={() => changeTheme(theme)}
-        id="ToggleButton"
-        type="checkbox"
-      />
-      <ToggleLable htmlFor="ToggleButton" />
-    </ToggleWrapper>
+    <DarkMoodWrapper theme={theme.themes[theme.theme]}>
+      {theme.theme === "light" ? (
+        <FaSun className="icon" />
+      ) : (
+        <HiMoon className="icon" />
+      )}
+      <ToggleWrapper>
+        <Toggle
+          onChange={() => changeTheme(theme)}
+          id="ToggleButton"
+          type="checkbox"
+        />
+        <ToggleLable htmlFor="ToggleButton" />
+      </ToggleWrapper>
+    </DarkMoodWrapper>
   );
 };
 

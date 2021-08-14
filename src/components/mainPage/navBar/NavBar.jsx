@@ -9,7 +9,7 @@ const Nav = styled.nav`
   width: 100%;
   height: 8vh;
   background-color: ${(props) => props.theme.secondBackground};
-  @media (max-width: 1024px) {
+  @media (max-width: 515px) {
     justify-content: center;
   }
 `;
@@ -29,6 +29,7 @@ const Logo = styled.img`
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 `;
 
 const NavBar = ({ themes, theme, setTheme }) => {
@@ -43,7 +44,7 @@ const NavBar = ({ themes, theme, setTheme }) => {
           )}
           <Title theme={themes[theme]}>Covid-19 Tracker | global</Title>
         </LogoWrapper>
-        <ToggleButton setTheme={setTheme} theme={theme} />
+        <ToggleButton setTheme={setTheme} theme={theme} themes={themes} />
       </Nav>
     </React.Fragment>
   );
