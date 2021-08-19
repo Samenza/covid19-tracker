@@ -4,14 +4,14 @@ import Content from "./content/Content";
 import Footer from "./footer/Footer";
 
 const lightTheme = {
-  background: "#0f4c5c",
+  background: "#73b0e3",
   text: "#4f5d75",
   secondText: "#ffffff",
   secondBackground: "#fbfbfb",
   chartColorGrid: "#4f5d753d",
 };
 const darkTheme = {
-  background: "#95a4a7",
+  background: "#9fd4f8",
   text: "#ffffff",
   secondText: "#000000",
   secondBackground: "#3a3a3a",

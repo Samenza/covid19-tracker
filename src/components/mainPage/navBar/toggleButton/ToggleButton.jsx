@@ -14,7 +14,7 @@ const ToggleLable = styled.label`
   width: 45px;
   height: 22px;
   border-radius: 15px;
-  background-color: #888888;
+  background-color: #4f5d75;
   cursor: pointer;
   &::after {
     content: "";
@@ -33,7 +33,7 @@ const Toggle = styled.input`
   height: 20px;
   border-radius: 15px;
   &:checked + ${ToggleLable} {
-    background-color: #0f4c5c;
+    background-color: #9ebed3;
     &::after {
       content: "";
       display: block;

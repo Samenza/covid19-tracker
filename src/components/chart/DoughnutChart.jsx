@@ -29,7 +29,7 @@ const Buttun = styled.button`
   margin-top: 1rem;
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.secondText};
-  box-shadow: 0 1px 1px 1px ${(props) => props.theme.chartColorGrid};
+  box-shadow: 0 1px 1px 1px ${(props) => props.theme.darkOnlight};
   border: none;
   border-radius: 4px;
   cursor: pointer;
