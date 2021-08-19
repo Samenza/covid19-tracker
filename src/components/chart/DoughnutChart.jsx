@@ -27,7 +27,7 @@ const Title = styled.h3`
 const Buttun = styled.button`
   padding: 0.6rem;
   margin-top: 1rem;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.text};
   color: ${(props) => props.theme.secondText};
   box-shadow: 0 1px 1px 1px ${(props) => props.theme.darkOnlight};
   border: none;

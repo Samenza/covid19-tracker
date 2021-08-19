@@ -89,7 +89,7 @@ const SelectOptions = styled.select`
   outline: none;
   user-select: none;
   border-radius: 6px;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.text};
   color: ${(props) => props.theme.secondText};
   padding: 2px;
   @media (max-width: 429px) {
