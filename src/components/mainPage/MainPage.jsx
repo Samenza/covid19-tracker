@@ -11,7 +11,7 @@ const lightTheme = {
   chartColorGrid: "#4f5d753d",
 };
 const darkTheme = {
-  background: "#9fd4f8",
+  background: "#305d70",
   text: "#ffffff",
   secondText: "#000000",
   secondBackground: "#3a3a3a",
